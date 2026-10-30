@@ -33,7 +33,7 @@ export class LivroRepository {
     quantidadeDisponivel: number, 
     autorId: number
   ): Promise<Livro> {
-    const novoLivro = new Livro(this.nextId++, titulo, anoPublicacao, quantidadeDisponivel, autorId);
+    const novoLivro = new Livro(this.nextId++, titulo, autorId, anoPublicacao, quantidadeDisponivel);
     this.livros.push(novoLivro);
     return novoLivro;
   }
