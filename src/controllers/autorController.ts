@@ -36,4 +36,15 @@ export class AutorController {
       console.error(`\n[Erro ao listar autores]: ${error.message}`);
     }
   }
+
+  async consultar(id: number): Promise<void> {
+    try {
+      const autor = await this.autorService.buscarPorId(id);
+      console.log(
+        `ID: ${autor.id} | Nome: ${autor.nome} | Nacionalidade: ${autor.nacionalidade} | Nasc.: ${autor.dataNascimento}`
+      );
+    } catch (error: any) {
+      console.error(`\n[Erro ao consultar autor]: ${error.message}`);
+    }
+  }
 }

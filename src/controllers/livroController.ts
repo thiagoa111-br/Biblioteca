@@ -36,4 +36,15 @@ export class LivroController {
       console.error(`\n[Erro ao listar livros]: ${error.message}`);
     }
   }
+
+  async consultar(id: number): Promise<void> {
+    try {
+      const livro = await this.livroService.buscarPorId(id);
+      console.log(
+        `ID: ${livro.id} | Título: ${livro.titulo} | Ano: ${livro.anoPublicacao} | Stock: ${livro.quantidadeDisponivel} | ID Autor: ${livro.autorId}`
+      );
+    } catch (error: any) {
+      console.error(`\n[Erro ao consultar livro]: ${error.message}`);
+    }
+  }
 }

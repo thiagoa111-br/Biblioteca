@@ -70,6 +70,7 @@ export class MainMenu {
     console.log('\n--- GESTÃO DE AUTORES ---');
     console.log('1. Listar Autores');
     console.log('2. Cadastrar Autor');
+    console.log('3. Consultar Autor por ID');
     console.log('0. Voltar');
 
     const opt = await this.pergunta('Opção: ');
@@ -81,6 +82,9 @@ export class MainMenu {
       const nac = await this.pergunta('Nacionalidade: ');
       const dataNasc = await this.pergunta('Data de Nascimento (AAAA-MM-DD): ');
       await this.autorCtrl.cadastrar(nome, nac, dataNasc);
+    } else if (opt.trim() === '3') {
+      const id = parseInt(await this.pergunta('ID do Autor: '), 10);
+      await this.autorCtrl.consultar(id);
     }
   }
 
@@ -88,6 +92,7 @@ export class MainMenu {
     console.log('\n--- GESTÃO DE LIVROS ---');
     console.log('1. Listar Livros');
     console.log('2. Cadastrar Livro');
+    console.log('3. Consultar Livro por ID');
     console.log('0. Voltar');
 
     const opt = await this.pergunta('Opção: ');
@@ -100,6 +105,9 @@ export class MainMenu {
       const qtd = parseInt(await this.pergunta('Quantidade em Stock: '), 10);
       const autorId = parseInt(await this.pergunta('ID do Autor: '), 10);
       await this.livroCtrl.cadastrar(titulo, ano, qtd, autorId);
+    } else if (opt.trim() === '3') {
+      const id = parseInt(await this.pergunta('ID do Livro: '), 10);
+      await this.livroCtrl.consultar(id);
     }
   }
 
@@ -107,6 +115,7 @@ export class MainMenu {
     console.log('\n--- GESTÃO DE CLIENTES ---');
     console.log('1. Listar Clientes');
     console.log('2. Cadastrar Cliente');
+    console.log('3. Consultar Cliente por ID');
     console.log('0. Voltar');
 
     const opt = await this.pergunta('Opção: ');
@@ -118,6 +127,9 @@ export class MainMenu {
       const email = await this.pergunta('E-mail: ');
       const tel = await this.pergunta('Telefone: ');
       await this.clienteCtrl.cadastrar(nome, email, tel);
+    } else if (opt.trim() === '3') {
+      const id = parseInt(await this.pergunta('ID do Cliente: '), 10);
+      await this.clienteCtrl.consultar(id);
     }
   }
 
@@ -126,6 +138,7 @@ export class MainMenu {
     console.log('1. Listar Histórico de Empréstimos');
     console.log('2. Realizar Empréstimo');
     console.log('3. Regista Devolução');
+    console.log('4. Consultar Empréstimo por ID');
     console.log('0. Voltar');
 
     const opt = await this.pergunta('Opção: ');
@@ -141,6 +154,9 @@ export class MainMenu {
       const empId = parseInt(await this.pergunta('ID do Empréstimo: '), 10);
       const dataDev = await this.pergunta('Data de Devolução (AAAA-MM-DD): ');
       await this.emprestimoCtrl.registrarDevolucao(empId, dataDev);
+    } else if (opt.trim() === '4') {
+      const empId = parseInt(await this.pergunta('ID do Empréstimo: '), 10);
+      await this.emprestimoCtrl.consultar(empId);
     }
   }
 }

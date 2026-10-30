@@ -35,17 +35,31 @@ export class EmprestimoController {
    */
   async listar(): Promise<void> {
     try {
-      const emprestimos = await this.emprestimoService.listarEmprestimos();
+      const emprestimos = await this.emprestimoService.listarEmprestimosDetalhados();
       console.log('\n--- Histórico de Empréstimos ---');
       if (emprestimos.length === 0) {
         console.log('Nenhum empréstimo registado.');
         return;
       }
-      emprestimos.forEach(e => {
-        console.log(`ID: ${e.id} | Livro ID: ${e.livroId} | Cliente ID: ${e.clienteId} | Data: ${e.dataEmprestimo} | Status: ${e.status}`);
+      emprestimos.forEach(({ emprestimo, livroTitulo, clienteNome }) => {
+        console.log(
+          `ID: ${emprestimo.id} | Livro: ${livroTitulo} (ID ${emprestimo.livroId}) | Cliente: ${clienteNome} (ID ${emprestimo.clienteId}) | Data: ${emprestimo.dataEmprestimo} | Status: ${emprestimo.status}`
+        );
       });
     } catch (error: any) {
       console.error(`\n[Erro ao listar empréstimos]: ${error.message}`);
+    }
+  }
+
+  async consultar(emprestimoId: number): Promise<void> {
+    try {
+      const { emprestimo, livroTitulo, clienteNome } =
+        await this.emprestimoService.consultarEmprestimoPorId(emprestimoId);
+      console.log(
+        `ID: ${emprestimo.id} | Livro: ${livroTitulo} (ID ${emprestimo.livroId}) | Cliente: ${clienteNome} (ID ${emprestimo.clienteId}) | Data: ${emprestimo.dataEmprestimo} | Data de devolução: ${emprestimo.dataDevolucao ?? 'Pendente'} | Status: ${emprestimo.status}`
+      );
+    } catch (error: any) {
+      console.error(`\n[Erro ao consultar empréstimo]: ${error.message}`);
     }
   }
 }

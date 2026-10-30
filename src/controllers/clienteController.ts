@@ -39,4 +39,15 @@ export class ClienteController {
       console.error(`\n[Erro ao listar clientes]: ${error.message}`);
     }
   }
+
+  async consultar(id: number): Promise<void> {
+    try {
+      const cliente = await this.clienteService.buscarPorId(id);
+      console.log(
+        `ID: ${cliente.id} | Nome: ${cliente.nome} | E-mail: ${cliente.email} | Telefone: ${cliente.telefone}`
+      );
+    } catch (error: any) {
+      console.error(`\n[Erro ao consultar cliente]: ${error.message}`);
+    }
+  }
 }
