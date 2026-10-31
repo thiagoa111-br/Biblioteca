@@ -47,4 +47,25 @@ export class LivroController {
       console.error(`\n[Erro ao consultar livro]: ${error.message}`);
     }
   }
+
+  async atualizar(
+    id: number,
+    dados: { titulo: string; anoPublicacao: number; quantidadeDisponivel: number; autorId: number }
+  ): Promise<void> {
+    try {
+      const livro = await this.livroService.atualizarLivro(id, dados);
+      console.log(`\n[Sucesso] Livro ${livro.id} atualizado: ${livro.titulo}`);
+    } catch (error: any) {
+      console.error(`\n[Erro ao atualizar livro]: ${error.message}`);
+    }
+  }
+
+  async remover(id: number): Promise<void> {
+    try {
+      await this.livroService.removerLivro(id);
+      console.log(`\n[Sucesso] Livro ${id} removido.`);
+    } catch (error: any) {
+      console.error(`\n[Erro ao remover livro]: ${error.message}`);
+    }
+  }
 }

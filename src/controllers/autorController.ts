@@ -47,4 +47,22 @@ export class AutorController {
       console.error(`\n[Erro ao consultar autor]: ${error.message}`);
     }
   }
+
+  async atualizar(id: number, dados: { nome: string; nacionalidade: string; dataNascimento: string }): Promise<void> {
+    try {
+      const autor = await this.autorService.atualizarAutor(id, dados);
+      console.log(`\n[Sucesso] Autor ${autor.id} atualizado: ${autor.nome}`);
+    } catch (error: any) {
+      console.error(`\n[Erro ao atualizar autor]: ${error.message}`);
+    }
+  }
+
+  async remover(id: number): Promise<void> {
+    try {
+      await this.autorService.removerAutor(id);
+      console.log(`\n[Sucesso] Autor ${id} removido.`);
+    } catch (error: any) {
+      console.error(`\n[Erro ao remover autor]: ${error.message}`);
+    }
+  }
 }

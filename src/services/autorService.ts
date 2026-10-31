@@ -1,11 +1,15 @@
 import { AutorRepository } from '../repositories/autorRepository';
+import { LivroRepository } from '../repositories/LivroRepository';
 import { Autor } from '../models/autor';
 
 /**
  * Serviço responsável por gerir as regras de negócio e validações associadas aos Autores.
  */
 export class AutorService {
-  constructor(private autorRepo: AutorRepository) {}
+  constructor(
+    private autorRepo: AutorRepository,
+    private livroRepo: LivroRepository
+  ) {}
 
   /**
    * Valida os dados e cria um novo autor no sistema.
@@ -36,10 +40,30 @@ export class AutorService {
     return autor;
   }
 
+  async atualizarAutor(id: number, dados: Partial<Omit<Autor, 'id'>>): Promise<Autor> {
+    await this.buscarPorId(id);
+
+    if (dados.nome !== undefined && dados.nome.trim() === '') {
+      throw new Error('O nome do autor não pode estar vazio.');
+    }
+
+    const autorAtualizado = await this.autorRepo.atualizar(id, dados);
+    if (!autorAtualizado) {
+      throw new Error('Não foi possível atualizar o autor.');
+    }
+    return autorAtualizado;
+  }
+
   /**
    * Remove um autor com base no ID fornecido.
    */
   async removerAutor(id: number): Promise<boolean> {
+    await this.buscarPorId(id);
+    const livros = await this.livroRepo.listar();
+    if (livros.some(livro => livro.autorId === id)) {
+      throw new Error('Não é possível remover um autor que possui livros cadastrados.');
+    }
+
     const removido = await this.autorRepo.remover(id);
     if (!removido) {
       throw new Error('Autor não encontrado para remoção.');

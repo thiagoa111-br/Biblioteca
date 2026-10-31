@@ -27,9 +27,9 @@ async function bootstrap() {
   await carregarDadosIniciais(autorRepo, livroRepo, clienteRepo);
 
   // 3. Instancia Serviços
-  const autorService = new AutorService(autorRepo);
-  const livroService = new LivroService(livroRepo, autorRepo);
-  const clienteService = new ClienteService(clienteRepo);
+  const autorService = new AutorService(autorRepo, livroRepo);
+  const livroService = new LivroService(livroRepo, autorRepo, emprestimoRepo);
+  const clienteService = new ClienteService(clienteRepo, emprestimoRepo);
   const emprestimoService = new EmprestimoService(emprestimoRepo, livroRepo, clienteRepo);
 
   // 4. Instancia Controladores
