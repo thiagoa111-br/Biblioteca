@@ -13,5 +13,12 @@ export declare class AutorController {
      * Lista todos os autores registados na consola.
      */
     listar(): Promise<void>;
+    consultar(id: number): Promise<void>;
+    atualizar(id: number, dados: {
+        nome: string;
+        nacionalidade: string;
+        dataNascimento: string;
+    }): Promise<void>;
+    remover(id: number): Promise<void>;
 }
 //# sourceMappingURL=autorController.d.ts.map

@@ -40,6 +40,33 @@ class LivroController {
             console.error(`\n[Erro ao listar livros]: ${error.message}`);
         }
     }
+    async consultar(id) {
+        try {
+            const livro = await this.livroService.buscarPorId(id);
+            console.log(`ID: ${livro.id} | Título: ${livro.titulo} | Ano: ${livro.anoPublicacao} | Stock: ${livro.quantidadeDisponivel} | ID Autor: ${livro.autorId}`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao consultar livro]: ${error.message}`);
+        }
+    }
+    async atualizar(id, dados) {
+        try {
+            const livro = await this.livroService.atualizarLivro(id, dados);
+            console.log(`\n[Sucesso] Livro ${livro.id} atualizado: ${livro.titulo}`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao atualizar livro]: ${error.message}`);
+        }
+    }
+    async remover(id) {
+        try {
+            await this.livroService.removerLivro(id);
+            console.log(`\n[Sucesso] Livro ${id} removido.`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao remover livro]: ${error.message}`);
+        }
+    }
 }
 exports.LivroController = LivroController;
 //# sourceMappingURL=livroController.js.map

@@ -67,6 +67,32 @@ class EmprestimoService {
     async listarEmprestimos() {
         return this.emprestimoRepo.listar();
     }
+    async consultarEmprestimoPorId(id) {
+        const emprestimo = await this.emprestimoRepo.buscarPorId(id);
+        if (!emprestimo) {
+            throw new Error('Registo de empréstimo não encontrado.');
+        }
+        return this.detalharEmprestimo(emprestimo);
+    }
+    async listarEmprestimosDetalhados() {
+        const emprestimos = await this.emprestimoRepo.listar();
+        return Promise.all(emprestimos.map(emprestimo => this.detalharEmprestimo(emprestimo)));
+    }
+    async detalharEmprestimo(emprestimo) {
+        const livro = await this.livroRepo.buscarPorId(emprestimo.livroId);
+        if (!livro) {
+            throw new Error(`O livro associado ao empréstimo ${emprestimo.id} não foi encontrado.`);
+        }
+        const cliente = await this.clienteRepo.buscarPorId(emprestimo.clienteId);
+        if (!cliente) {
+            throw new Error(`O cliente associado ao empréstimo ${emprestimo.id} não foi encontrado.`);
+        }
+        return {
+            emprestimo,
+            livroTitulo: livro.titulo,
+            clienteNome: cliente.nome
+        };
+    }
 }
 exports.EmprestimoService = EmprestimoService;
 //# sourceMappingURL=emprestimoService.js.map

@@ -23,9 +23,9 @@ async function bootstrap() {
     // 2. Carrega Dados Iniciais (Seed)
     await (0, seed_1.carregarDadosIniciais)(autorRepo, livroRepo, clienteRepo);
     // 3. Instancia Serviços
-    const autorService = new autorService_1.AutorService(autorRepo);
-    const livroService = new livroService_1.LivroService(livroRepo, autorRepo);
-    const clienteService = new clienteService_1.ClienteService(clienteRepo);
+    const autorService = new autorService_1.AutorService(autorRepo, livroRepo);
+    const livroService = new livroService_1.LivroService(livroRepo, autorRepo, emprestimoRepo);
+    const clienteService = new clienteService_1.ClienteService(clienteRepo, emprestimoRepo);
     const emprestimoService = new emprestimoService_1.EmprestimoService(emprestimoRepo, livroRepo, clienteRepo);
     // 4. Instancia Controladores
     const autorCtrl = new autorController_1.AutorController(autorService);

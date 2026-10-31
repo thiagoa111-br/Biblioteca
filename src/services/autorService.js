@@ -6,8 +6,10 @@ exports.AutorService = void 0;
  */
 class AutorService {
     autorRepo;
-    constructor(autorRepo) {
+    livroRepo;
+    constructor(autorRepo, livroRepo) {
         this.autorRepo = autorRepo;
+        this.livroRepo = livroRepo;
     }
     /**
      * Valida os dados e cria um novo autor no sistema.
@@ -35,10 +37,26 @@ class AutorService {
         }
         return autor;
     }
+    async atualizarAutor(id, dados) {
+        await this.buscarPorId(id);
+        if (dados.nome !== undefined && dados.nome.trim() === '') {
+            throw new Error('O nome do autor não pode estar vazio.');
+        }
+        const autorAtualizado = await this.autorRepo.atualizar(id, dados);
+        if (!autorAtualizado) {
+            throw new Error('Não foi possível atualizar o autor.');
+        }
+        return autorAtualizado;
+    }
     /**
      * Remove um autor com base no ID fornecido.
      */
     async removerAutor(id) {
+        await this.buscarPorId(id);
+        const livros = await this.livroRepo.listar();
+        if (livros.some(livro => livro.autorId === id)) {
+            throw new Error('Não é possível remover um autor que possui livros cadastrados.');
+        }
         const removido = await this.autorRepo.remover(id);
         if (!removido) {
             throw new Error('Autor não encontrado para remoção.');

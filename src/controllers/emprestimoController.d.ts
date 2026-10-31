@@ -17,5 +17,6 @@ export declare class EmprestimoController {
      * Lista o histórico de todos os empréstimos efetuados.
      */
     listar(): Promise<void>;
+    consultar(emprestimoId: number): Promise<void>;
 }
 //# sourceMappingURL=emprestimoController.d.ts.map

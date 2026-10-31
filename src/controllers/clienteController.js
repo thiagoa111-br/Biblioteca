@@ -40,6 +40,33 @@ class ClienteController {
             console.error(`\n[Erro ao listar clientes]: ${error.message}`);
         }
     }
+    async consultar(id) {
+        try {
+            const cliente = await this.clienteService.buscarPorId(id);
+            console.log(`ID: ${cliente.id} | Nome: ${cliente.nome} | E-mail: ${cliente.email} | Telefone: ${cliente.telefone}`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao consultar cliente]: ${error.message}`);
+        }
+    }
+    async atualizar(id, dados) {
+        try {
+            const cliente = await this.clienteService.atualizarCliente(id, dados);
+            console.log(`\n[Sucesso] Cliente ${cliente.id} atualizado: ${cliente.nome}`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao atualizar cliente]: ${error.message}`);
+        }
+    }
+    async remover(id) {
+        try {
+            await this.clienteService.removerCliente(id);
+            console.log(`\n[Sucesso] Cliente ${id} removido.`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao remover cliente]: ${error.message}`);
+        }
+    }
 }
 exports.ClienteController = ClienteController;
 //# sourceMappingURL=clienteController.js.map

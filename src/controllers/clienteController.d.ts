@@ -13,5 +13,12 @@ export declare class ClienteController {
      * Lista todos os clientes registados na consola.
      */
     listar(): Promise<void>;
+    consultar(id: number): Promise<void>;
+    atualizar(id: number, dados: {
+        nome: string;
+        email: string;
+        telefone: string;
+    }): Promise<void>;
+    remover(id: number): Promise<void>;
 }
 //# sourceMappingURL=clienteController.d.ts.map

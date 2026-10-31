@@ -1,11 +1,13 @@
 import { ClienteRepository } from '../repositories/clienteRepository';
+import { EmprestimoRepository } from '../repositories/EmprestimoRepository';
 import { Cliente } from '../models/clientes';
 /**
  * Serviço responsável por gerir as regras de negócio e validações dos Clientes.
  */
 export declare class ClienteService {
     private clienteRepo;
-    constructor(clienteRepo: ClienteRepository);
+    private emprestimoRepo;
+    constructor(clienteRepo: ClienteRepository, emprestimoRepo: EmprestimoRepository);
     /**
      * Valida as informações obrigatórias e cadastra um novo cliente.
      */
@@ -18,6 +20,7 @@ export declare class ClienteService {
      * Busca um cliente pelo ID.
      */
     buscarPorId(id: number): Promise<Cliente>;
+    atualizarCliente(id: number, dados: Partial<Omit<Cliente, 'id'>>): Promise<Cliente>;
     /**
      * Remove um cliente com base no ID.
      */

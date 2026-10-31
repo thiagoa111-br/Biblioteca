@@ -2,6 +2,11 @@ import { EmprestimoRepository } from '../repositories/EmprestimoRepository';
 import { LivroRepository } from '../repositories/LivroRepository';
 import { ClienteRepository } from '../repositories/clienteRepository';
 import { Emprestimo } from '../models/emprestimo';
+export interface EmprestimoDetalhado {
+    emprestimo: Emprestimo;
+    livroTitulo: string;
+    clienteNome: string;
+}
 /**
  * Serviço responsável pelas regras de negócio e validações de Empréstimos e Devoluções.
  */
@@ -22,5 +27,8 @@ export declare class EmprestimoService {
      * Retorna o histórico completo de empréstimos.
      */
     listarEmprestimos(): Promise<Emprestimo[]>;
+    consultarEmprestimoPorId(id: number): Promise<EmprestimoDetalhado>;
+    listarEmprestimosDetalhados(): Promise<EmprestimoDetalhado[]>;
+    private detalharEmprestimo;
 }
 //# sourceMappingURL=emprestimoService.d.ts.map

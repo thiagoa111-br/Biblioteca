@@ -40,6 +40,33 @@ class AutorController {
             console.error(`\n[Erro ao listar autores]: ${error.message}`);
         }
     }
+    async consultar(id) {
+        try {
+            const autor = await this.autorService.buscarPorId(id);
+            console.log(`ID: ${autor.id} | Nome: ${autor.nome} | Nacionalidade: ${autor.nacionalidade} | Nasc.: ${autor.dataNascimento}`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao consultar autor]: ${error.message}`);
+        }
+    }
+    async atualizar(id, dados) {
+        try {
+            const autor = await this.autorService.atualizarAutor(id, dados);
+            console.log(`\n[Sucesso] Autor ${autor.id} atualizado: ${autor.nome}`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao atualizar autor]: ${error.message}`);
+        }
+    }
+    async remover(id) {
+        try {
+            await this.autorService.removerAutor(id);
+            console.log(`\n[Sucesso] Autor ${id} removido.`);
+        }
+        catch (error) {
+            console.error(`\n[Erro ao remover autor]: ${error.message}`);
+        }
+    }
 }
 exports.AutorController = AutorController;
 //# sourceMappingURL=autorController.js.map

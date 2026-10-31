@@ -1,5 +1,6 @@
 import { LivroRepository } from '../repositories/LivroRepository';
 import { AutorRepository } from '../repositories/autorRepository';
+import { EmprestimoRepository } from '../repositories/EmprestimoRepository';
 import { Livro } from '../models/livro';
 /**
  * Serviço responsável pelas regras de negócio e validações relacionadas aos Livros.
@@ -7,7 +8,8 @@ import { Livro } from '../models/livro';
 export declare class LivroService {
     private livroRepo;
     private autorRepo;
-    constructor(livroRepo: LivroRepository, autorRepo: AutorRepository);
+    private emprestimoRepo;
+    constructor(livroRepo: LivroRepository, autorRepo: AutorRepository, emprestimoRepo: EmprestimoRepository);
     /**
      * Valida a existência do autor, o título e o stock antes de registar um novo livro.
      */
@@ -20,6 +22,7 @@ export declare class LivroService {
      * Procura um livro por ID ou lança uma exceção se não existir.
      */
     buscarPorId(id: number): Promise<Livro>;
+    atualizarLivro(id: number, dados: Partial<Omit<Livro, 'id'>>): Promise<Livro>;
     /**
      * Remove um livro do sistema pelo ID.
      */
