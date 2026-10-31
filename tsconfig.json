@@ -1,39 +1,33 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
+  // Visite https://aka.ms/tsconfig para ler mais sobre este ficheiro
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    /* ---------------- Estrutura de Ficheiros e Diretórios ---------------- */
+    "rootDir": "./src",                  /* Especifica a pasta raiz onde está todo o teu código-fonte em TypeScript (.ts) */
+    "outDir": "./dist",                  /* Especifica a pasta para onde vão todos os ficheiros compilados (.js, .d.ts, .map) */
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "commonjs",
-    "target": "esnext",
-    "types": ["node"],
+    /* ---------------- Definições de Ambiente e Módulos ---------------- */
+    "module": "commonjs",                /* Define o sistema de módulos utilizado (padrão para aplicações Node.js) */
+    "target": "esnext",                  /* Define a versão do JavaScript gerada (esnext gera a versão mais moderna do JS) */
+    "types": ["node"],                   /* Inclui as definições de tipos globais do Node.js */
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    /* ---------------- Ficheiros de Saída e Debug ---------------- */
+    "sourceMap": true,                   /* Gera ficheiros .map (permite fazer debug no VS Code apontando para as linhas do .ts) */
+    "declaration": true,                 /* Gera ficheiros .d.ts com as definições de tipos para bibliotecas/autocompletar */
+    "declarationMap": true,              /* Gera mapeamento para navegar diretamente para os ficheiros .d.ts */
 
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    /* ---------------- Verificações Estritas de Tipos ---------------- */
+    "noUncheckedIndexedAccess": true,    /* Garante maior segurança ao aceder a arrays ou objetos por chave/índice */
+    "exactOptionalPropertyTypes": true,  /* Aplica regras estritas a propriedades opcionais em interfaces/tipos */
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    /* ---------------- Opções Gerais Recomendadas ---------------- */
+    "strict": true,                      /* Ativa todas as verificações de segurança e checagem estrita do TypeScript */
+    "jsx": "react-jsx",                  /* Configuração para suporte a sintaxe JSX/React (se aplicável) */
+    "isolatedModules": true,             /* Garante que cada ficheiro pode ser transpilado de forma independente */
+    "noUncheckedSideEffectImports": true,/* Evita importações com efeitos secundários não verificados */
+    "moduleDetection": "force",          /* Força a deteção automática de módulos em todos os ficheiros */
+    "skipLibCheck": true                 /* Ignora a verificação de tipos dentro dos pacotes da pasta node_modules (acelera a compilação) */
+  },
+  /* ---------------- Mapeamento de Compilação ---------------- */
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
