@@ -1,9 +1,12 @@
 {
   "name": "biblioteca",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "BookStore Manager CLI",
+  "main": "dist/main.js",
   "scripts": {
+    "dev": "npm run build && npm start",
+    "build": "tsc",
+    "start": "node dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
