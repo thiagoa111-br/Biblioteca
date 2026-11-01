@@ -112,5 +112,4 @@ O vídeo de demonstração deve apresentar a inicialização do sistema, algumas
 
 ## Informações da equipe
 
-- Integrantes: preencher com os nomes da equipe.
-- Quadro Kanban: adicionar o link do quadro, se aplicável.
+- Integrante: Thiago Afonso
